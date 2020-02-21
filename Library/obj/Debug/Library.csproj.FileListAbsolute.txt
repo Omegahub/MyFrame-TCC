@@ -1,0 +1,16 @@
+C:\Users\marce\Desktop\MyFrame\MyEB\Library\bin\Debug\Library.dll
+C:\Users\marce\Desktop\MyFrame\MyEB\Library\bin\Debug\Library.pdb
+C:\Users\marce\Desktop\MyFrame\MyEB\Library\obj\Debug\Library.csprojAssemblyReference.cache
+C:\Users\marce\Desktop\MyFrame\MyEB\Library\obj\Debug\Library.dll
+C:\Users\marce\Desktop\MyFrame\MyEB\Library\obj\Debug\Library.pdb
+C:\Users\Aluno\Downloads\MyFrame-TCC-master\Library\bin\Debug\Library.dll
+C:\Users\Aluno\Downloads\MyFrame-TCC-master\Library\bin\Debug\Library.pdb
+C:\Users\Aluno\Downloads\MyFrame-TCC-master\Library\obj\Debug\Library.csprojAssemblyReference.cache
+C:\Users\Aluno\Downloads\MyFrame-TCC-master\Library\obj\Debug\Library.csproj.CoreCompileInputs.cache
+C:\Users\Aluno\Downloads\MyFrame-TCC-master\Library\obj\Debug\Library.dll
+C:\Users\Aluno\Downloads\MyFrame-TCC-master\Library\obj\Debug\Library.pdb
+E:\MyFrame-TCC-master\Library\bin\Debug\Library.dll
+E:\MyFrame-TCC-master\Library\bin\Debug\Library.pdb
+E:\MyFrame-TCC-master\Library\obj\Debug\Library.csprojAssemblyReference.cache
+E:\MyFrame-TCC-master\Library\obj\Debug\Library.dll
+E:\MyFrame-TCC-master\Library\obj\Debug\Library.pdb
