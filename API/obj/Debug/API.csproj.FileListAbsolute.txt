@@ -257,3 +257,6 @@ E:\MyFrame-TCC-master\API\obj\Debug\API.csprojAssemblyReference.cache
 E:\MyFrame-TCC-master\API\obj\Debug\API.csproj.CopyComplete
 E:\MyFrame-TCC-master\API\obj\Debug\API.dll
 E:\MyFrame-TCC-master\API\obj\Debug\API.pdb
+C:\Users\marce\Desktop\MyEb\MyFrame-TCC\API\obj\Debug\API.csprojAssemblyReference.cache
+C:\Users\marce\Desktop\MyEb\MyFrame-TCC\API\obj\Debug\API.dll
+C:\Users\marce\Desktop\MyEb\MyFrame-TCC\API\obj\Debug\API.pdb
