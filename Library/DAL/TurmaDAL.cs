@@ -17,15 +17,15 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("INSERT INTO Turma ");
-                sql.AppendLine("(nomeCurso) ");
-                sql.AppendLine("VALUES (@nomeCurso) ");
+                sql.AppendLine("INSERT INTO TTURMA ");
+                sql.AppendLine("(TUNMTURMA) ");
+                sql.AppendLine("VALUES (@TUNMTURMA) ");
                 sql.AppendLine("SELECT SCOPE_IDENTITY(); ");//Linha Responsável por retornar id que foi Inserido
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@nomeCurso", t.NomeCurso);
+                    cmd.Parameters.AddWithValue("@TUNMTURMA", t.NomeCurso);
 
                     con.Open();
                     t.IdTurma = Convert.ToInt32(cmd.ExecuteScalar());
@@ -41,15 +41,15 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("UPDATE Turma SET ");
-                sql.AppendLine("nomeCurso = @nomeCurso, ");
-                sql.AppendLine("WHERE idTurma = @idTurma ");
+                sql.AppendLine("UPDATE TTURMA SET ");
+                sql.AppendLine("TUNMTURMA = @TUNMTURMA, ");
+                sql.AppendLine("WHERE TUIDTURMA = @TUIDTURMA ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@nomeCurso", t.NomeCurso);
-                    cmd.Parameters.AddWithValue("@idTurma", t.IdTurma);
+                    cmd.Parameters.AddWithValue("@TUNMTURMA", t.NomeCurso);
+                    cmd.Parameters.AddWithValue("@TUIDTURMA", t.IdTurma);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -64,11 +64,11 @@ namespace Library.DAL
             int linhasAfetadas = 0;
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
-                string sql = "DELETE FROM Evento WHERE idTurma = @idTurma";
+                string sql = "DELETE FROM TTURMA WHERE TUIDTURMA = @TUIDTURMA";
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@idTurma", idTurma);
+                    cmd.Parameters.AddWithValue("@TUIDTURMA", idTurma);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -80,16 +80,16 @@ namespace Library.DAL
 
         public static List<Turma> GetAll()
         {
-            List<Turma> listaEventos = new List<Turma>();
+            List<Turma> listaTurma = new List<Turma>();
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idTurma, a.nomeCurso");
-                sql.AppendLine("FROM Turma a ");
+                sql.AppendLine("SELECT a.TUIDTURMA, a.TUNMTURMA");
+                sql.AppendLine("FROM TTURMA a ");
                 /*sql.AppendLine("WHERE a.FL_ATIVO = 1 ");*/
-                sql.AppendLine("ORDER BY a.nomeCurso ");
+                sql.AppendLine("ORDER BY a.TUNMTURMA ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
@@ -101,16 +101,16 @@ namespace Library.DAL
                             {
                                 Turma t = new Turma();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                t.IdTurma = Convert.ToInt32(dr["idTurma"]);
-                                t.NomeCurso = dr["nomeCurso"].ToString();
+                                t.IdTurma = Convert.ToInt32(dr["TUIDTURMA"]);
+                                t.NomeCurso = dr["TUNMTURMA"].ToString();
 
-                                listaEventos.Add(t);//Adicionando o objeto para a lista
+                                listaTurma.Add(t);//Adicionando o objeto para a lista
                             }
                         }
                     }
                 }
             }
-            return listaEventos;
+            return listaTurma;
         }
 
         public static Turma GetById(int idTurma)
@@ -122,15 +122,15 @@ namespace Library.DAL
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idTurma, a.nomeCurso");
-                sql.AppendLine("FROM Turma a ");
-                sql.AppendLine("WHERE a.idTurma = @idTurma ");
-                sql.AppendLine("ORDER BY a.nomeCurso ");
+                sql.AppendLine("SELECT a.TUIDTURMA, a.TUNMTURMA");
+                sql.AppendLine("FROM TTURMA a ");
+                sql.AppendLine("WHERE a.TUIDTURMA = @TUIDTURMA ");
+                sql.AppendLine("ORDER BY a.TUNMTURMA ");
 
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
-                    cmd.Parameters.AddWithValue("@idTurma", idTurma); //Passagem de parametro
+                    cmd.Parameters.AddWithValue("@TUIDTURMA", idTurma); //Passagem de parametro
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -140,8 +140,8 @@ namespace Library.DAL
                             {
                                 t = new Turma();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                t.IdTurma = Convert.ToInt32(dr["idTurma"]);
-                                t.NomeCurso = dr["nomeCurso"].ToString();
+                                t.IdTurma = Convert.ToInt32(dr["TUIDTURMA"]);
+                                t.NomeCurso = dr["TUNMTURMA"].ToString();
                             }
                         }
                     }

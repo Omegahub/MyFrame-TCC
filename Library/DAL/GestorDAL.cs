@@ -17,16 +17,16 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("INSERT INTO Gestor ");
-                sql.AppendLine("(idGestor, nomeGestor, dtNascGestor) ");
-                sql.AppendLine("VALUES (@idGestor, @nomeGestor, @dtNascGestor) ");
+                sql.AppendLine("INSERT INTO TGESTOR ");
+                sql.AppendLine("(GEIDGESTOR, GENMGESTOR, GEDTNASCGESTOR) ");
+                sql.AppendLine("VALUES (@GEIDGESTOR, @GENMGESTOR, @GEDTNASCGESTOR) ");
                 sql.AppendLine("SELECT SCOPE_IDENTITY(); ");//Linha Responsável por retornar id que foi Inserido
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@nomeGestor", g.NomeGestor);
-                    cmd.Parameters.AddWithValue("@dtNascGestor", g.DtNascGestor);
+                    cmd.Parameters.AddWithValue("@GENMGESTOR", g.NomeGestor);
+                    cmd.Parameters.AddWithValue("@GEDTNASCGESTOR", g.DtNascGestor);
 
                     con.Open();
                     g.IdGestor = Convert.ToInt32(cmd.ExecuteScalar());
@@ -42,17 +42,17 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("UPDATE Gestor SET ");
-                sql.AppendLine("nomeGestor = @nomeGestor, ");
-                sql.AppendLine("dtNascGestor = @dtNascGestor, ");
-                sql.AppendLine("WHERE idGestor = @idGestor ");
+                sql.AppendLine("UPDATE TGESTOR SET ");
+                sql.AppendLine("GENMGESTOR = @GENMGESTOR, ");
+                sql.AppendLine("GEDTNASCGESTOR = @GEDTNASCGESTOR, ");
+                sql.AppendLine("WHERE GEIDGESTOR = @GEIDGESTOR ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@nomeGestor", g.NomeGestor);
-                    cmd.Parameters.AddWithValue("@dtNascGestor", g.DtNascGestor);
-                    cmd.Parameters.AddWithValue("@idGestor", g.IdGestor);
+                    cmd.Parameters.AddWithValue("@GENMGESTOR", g.NomeGestor);
+                    cmd.Parameters.AddWithValue("@GEDTNASCGESTOR", g.DtNascGestor);
+                    cmd.Parameters.AddWithValue("@GEIDGESTOR", g.IdGestor);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -66,11 +66,11 @@ namespace Library.DAL
             int linhasAfetadas = 0;
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
-                string sql = "DELETE FROM Projeto WHERE idGestor = @idGestor";
+                string sql = "DELETE FROM TGESTOR WHERE GEIDGESTOR = @GEIDGESTOR";
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@idGestor", idGestor);
+                    cmd.Parameters.AddWithValue("@GEIDGESTOR", idGestor);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -82,16 +82,16 @@ namespace Library.DAL
 
         public static List<Gestor> GetAll()
         {
-            List<Gestor> listaEventos = new List<Gestor>();
+            List<Gestor> listaGestor = new List<Gestor>();
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idGestor, a.nomeGestor, a.dtNascGestor");
-                sql.AppendLine("FROM Gestor a ");
+                sql.AppendLine("SELECT a.GEIDGESTOR, a.GENMGESTOR, a.GEDTNASCGESTOR");
+                sql.AppendLine("FROM TGESTOR a ");
                 /*sql.AppendLine("WHERE a.FL_ATIVO = 1 ");*/
-                sql.AppendLine("ORDER BY a.nomeGestor ");
+                sql.AppendLine("ORDER BY a.GENMGESTOR ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
@@ -103,17 +103,17 @@ namespace Library.DAL
                             {
                                 Gestor g = new Gestor();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                g.IdGestor = Convert.ToInt32(dr["idGestor"]);
-                                g.NomeGestor = dr["nomeGestor"].ToString();
-                                g.DtNascGestor = Convert.ToDateTime(dr["dtNascGestor"]);
+                                g.IdGestor = Convert.ToInt32(dr["GEIDGESTOR"]);
+                                g.NomeGestor = dr["GENMGESTOR"].ToString();
+                                g.DtNascGestor = Convert.ToDateTime(dr["GEDTNASCGESTOR"]);
                                 
-                                listaEventos.Add(g);//Adicionando o objeto para a lista
+                                listaGestor.Add(g);//Adicionando o objeto para a lista
                             }
                         }
                     }
                 }
             }
-            return listaEventos;
+            return listaGestor;
         }
 
         public static Gestor GetById(int idGestor)
@@ -125,15 +125,15 @@ namespace Library.DAL
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idGestor, a.nomeGestor, a.dtNascGestor");
-                sql.AppendLine("FROM Gestor g ");
-                sql.AppendLine("WHERE a.idGestor = @idGestor ");
-                sql.AppendLine("ORDER BY a.nomeGestor ");
+                sql.AppendLine("SELECT a.GEIDGESTOR, a.GENMGESTOR, a.GEDTNASCGESTOR");
+                sql.AppendLine("FROM TGESTOR g ");
+                sql.AppendLine("WHERE a.GEIDGESTOR = @GEIDGESTOR ");
+                sql.AppendLine("ORDER BY a.GENMGESTOR ");
 
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
-                    cmd.Parameters.AddWithValue("@idGestor", idGestor); //Passagem de parametro
+                    cmd.Parameters.AddWithValue("@GEIDGESTOR", idGestor); //Passagem de parametro
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -143,9 +143,9 @@ namespace Library.DAL
                             {
                                 g = new Gestor();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                g.IdGestor = Convert.ToInt32(dr["idGestor"]);
-                                g.NomeGestor = dr["nomeGestor"].ToString();
-                                g.DtNascGestor = Convert.ToDateTime(dr["dtNascGestor"]);
+                                g.IdGestor = Convert.ToInt32(dr["GEIDGESTOR"]);
+                                g.NomeGestor = dr["GENMGESTOR"].ToString();
+                                g.DtNascGestor = Convert.ToDateTime(dr["GEDTNASCGESTOR"]);
                             }
                         }
                     }

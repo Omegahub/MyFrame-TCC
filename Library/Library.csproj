@@ -44,24 +44,24 @@
   <ItemGroup>
     <Compile Include="Business\AvaliacaoBLL.cs" />
     <Compile Include="Business\AvaliacaoCriterioBLL.cs" />
-    <Compile Include="Business\ConsumidorBLL.cs" />
     <Compile Include="Business\EventoBLL.cs" />
     <Compile Include="Business\GestorBLL.cs" />
     <Compile Include="Business\ProjetoBLL.cs" />
     <Compile Include="Business\TurmaBLL.cs" />
     <Compile Include="Business\TurmaItensBLL.cs" />
+    <Compile Include="Business\VisitanteBLL.cs" />
     <Compile Include="DAL\AvaliacaoCriterioDAL.cs" />
     <Compile Include="DAL\AvaliacaoDAL.cs" />
     <Compile Include="DAL\ConnectionFactory.cs" />
-    <Compile Include="DAL\ConsumidorDAL.cs" />
     <Compile Include="DAL\EventoDAL.cs" />
     <Compile Include="DAL\GestorDAL.cs" />
     <Compile Include="DAL\ProjetoDAL.cs" />
     <Compile Include="DAL\TurmaDAL.cs" />
     <Compile Include="DAL\TurmaItensDAL.cs" />
+    <Compile Include="DAL\VisitanteDAL.cs" />
     <Compile Include="Models\Avaliacao.cs" />
     <Compile Include="Models\AvaliacaoCriterio.cs" />
-    <Compile Include="Models\Consumidor.cs" />
+    <Compile Include="Models\Visitante.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\Gestor.cs" />
     <Compile Include="Models\Projeto.cs" />

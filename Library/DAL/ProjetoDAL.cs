@@ -17,18 +17,18 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("INSERT INTO Projeto ");
-                sql.AppendLine("(idProjeto, nomeProjeto, localProjeto, dtProjeto, descProjeto) ");
-                sql.AppendLine("VALUES (@idProjeto, @nomeProjeto, @localProjeto, @dtProjeto, @descProjeto) ");
+                sql.AppendLine("INSERT INTO TPROJETO ");
+                sql.AppendLine("(PROIDPROJ, PRONMPROJ, PROLOCPROJ, PRODTPROJ, PRODESCPROJ) ");
+                sql.AppendLine("VALUES (@PROIDPROJ, @PRONMPROJ, @PROLOCPROJ, @PRODTPROJ, @PRODESCPROJ) ");
                 sql.AppendLine("SELECT SCOPE_IDENTITY(); ");//Linha Responsável por retornar id que foi Inserido
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@nomeProjeto", p.NomeProjeto);
-                    cmd.Parameters.AddWithValue("@localProjeto", p.LocalProjeto);
-                    cmd.Parameters.AddWithValue("@dtProjeto", p.DtProjeto);
-                    cmd.Parameters.AddWithValue("@descProjeto", p.DescProjeto);
+                    cmd.Parameters.AddWithValue("@PRONMPROJ", p.NomeProjeto);
+                    cmd.Parameters.AddWithValue("@PROLOCPROJ", p.LocalProjeto);
+                    cmd.Parameters.AddWithValue("@PRODTPROJ", p.DtProjeto);
+                    cmd.Parameters.AddWithValue("@PRODESCPROJ", p.DescProjeto);
                     
                     con.Open();
                     p.IdProjeto = Convert.ToInt32(cmd.ExecuteScalar());
@@ -44,21 +44,21 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("UPDATE Projeto SET ");
-                sql.AppendLine("nomeProjeto = @nomeProjeto, ");
-                sql.AppendLine("localProjeto = @localProjeto, ");
-                sql.AppendLine("dtProjeto = @dtProjeto, ");
-                sql.AppendLine("descProjeto = @descProjeto, ");
-                sql.AppendLine("WHERE idProjeto = @idProjeto ");
+                sql.AppendLine("UPDATE TPROJETO SET ");
+                sql.AppendLine("PRONMPROJ = @PRONMPROJ, ");
+                sql.AppendLine("PROLOCPROJ = @PROLOCPROJ, ");
+                sql.AppendLine("PRODTPROJ = @PRODTPROJ, ");
+                sql.AppendLine("PRODESCPROJ = @PRODESCPROJ, ");
+                sql.AppendLine("WHERE PROIDPROJ = @PROIDPROJ ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@nomeProjeto", p.NomeProjeto);
-                    cmd.Parameters.AddWithValue("@localProjeto", p.LocalProjeto);
-                    cmd.Parameters.AddWithValue("@dtProjeto", p.DtProjeto);
-                    cmd.Parameters.AddWithValue("@descProjeto", p.DescProjeto);
-                    cmd.Parameters.AddWithValue("@idProjeto", p.IdProjeto);
+                    cmd.Parameters.AddWithValue("@PRONMPROJ", p.NomeProjeto);
+                    cmd.Parameters.AddWithValue("@PROLOCPROJ", p.LocalProjeto);
+                    cmd.Parameters.AddWithValue("@PRODTPROJ", p.DtProjeto);
+                    cmd.Parameters.AddWithValue("@PRODESCPROJ", p.DescProjeto);
+                    cmd.Parameters.AddWithValue("@PROIDPROJ", p.IdProjeto);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -73,11 +73,11 @@ namespace Library.DAL
             int linhasAfetadas = 0;
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
-                string sql = "DELETE FROM Projeto WHERE idProjeto = @idProjeto";
+                string sql = "DELETE FROM TPROJETO WHERE PROIDPROJ = @PROIDPROJ";
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@idProjeto", idProjeto);
+                    cmd.Parameters.AddWithValue("@PROIDPROJ", idProjeto);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -89,16 +89,16 @@ namespace Library.DAL
 
         public static List<Projeto> GetAll()
         {
-            List<Projeto> listaEventos = new List<Projeto>();
+            List<Projeto> listaProjetos = new List<Projeto>();
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idProjeto, a.nomeProjeto, a.localProjeto, a.dtProjeto, a.descProjeto");
-                sql.AppendLine("FROM Projeto a ");
+                sql.AppendLine("SELECT a.PROIDPROJ, a.PRONMPROJ, a.PROLOCPROJ, a.PRODTPROJ, a.PRODESCPROJ");
+                sql.AppendLine("FROM TPROJETO a ");
                 /*sql.AppendLine("WHERE a.FL_ATIVO = 1 ");*/
-                sql.AppendLine("ORDER BY a.nomeProjeto ");
+                sql.AppendLine("ORDER BY a.PRONMPROJ ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
@@ -110,19 +110,19 @@ namespace Library.DAL
                             {
                                 Projeto p = new Projeto();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                p.IdProjeto = Convert.ToInt32(dr["idProjeto"]);
-                                p.NomeProjeto = dr["nomeProjeto"].ToString();
-                                p.LocalProjeto = dr["localProjeto"].ToString();
-                                p.DtProjeto = Convert.ToDateTime(dr["dtProjeto"]);
-                                p.DescProjeto = dr["descProjeto"].ToString();
+                                p.IdProjeto = Convert.ToInt32(dr["PROIDPROJ"]);
+                                p.NomeProjeto = dr["PRONMPROJ"].ToString();
+                                p.LocalProjeto = dr["PROLOCPROJ"].ToString();
+                                p.DtProjeto = Convert.ToDateTime(dr["PRODTPROJ"]);
+                                p.DescProjeto = dr["PRODESCPROJ"].ToString();
 
-                                listaEventos.Add(p);//Adicionando o objeto para a lista
+                                listaProjetos.Add(p);//Adicionando o objeto para a lista
                             }
                         }
                     }
                 }
             }
-            return listaEventos;
+            return listaProjetos;
         }
 
         public static Projeto GetById(int idProjeto)
@@ -134,15 +134,15 @@ namespace Library.DAL
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idProjeto, a.nomeProjeto, a.localProjeto, a.dtProjeto, a.descProjeto");
-                sql.AppendLine("FROM Projeto a ");
-                sql.AppendLine("WHERE a.idProjeto = @idProjeto ");
-                sql.AppendLine("ORDER BY a.nomeProjeto ");
+                sql.AppendLine("SELECT a.PROIDPROJ, a.PRONMPROJ, a.PROLOCPROJ, a.PRODTPROJ, a.PRODESCPROJ");
+                sql.AppendLine("FROM TPROJETO a ");
+                sql.AppendLine("WHERE a.PROIDPROJ = @PROIDPROJ ");
+                sql.AppendLine("ORDER BY a.PRONMPROJ ");
 
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
-                    cmd.Parameters.AddWithValue("@idEvento", idProjeto); //Passagem de parametro
+                    cmd.Parameters.AddWithValue("@PROIDPROJ", idProjeto); //Passagem de parametro
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -152,11 +152,11 @@ namespace Library.DAL
                             {
                                 p = new Projeto();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                p.IdProjeto = Convert.ToInt32(dr["idProjeto"]);
-                                p.NomeProjeto = dr["nomeProjeto"].ToString();
-                                p.LocalProjeto = dr["localProjeto"].ToString();
-                                p.DtProjeto = Convert.ToDateTime(dr["dtProjeto"]);
-                                p.DescProjeto = dr["descProjeto"].ToString();
+                                p.IdProjeto = Convert.ToInt32(dr["PROIDPROJ"]);
+                                p.NomeProjeto = dr["PRONMPROJ"].ToString();
+                                p.LocalProjeto = dr["PROLOCPROJ"].ToString();
+                                p.DtProjeto = Convert.ToDateTime(dr["PRODTPROJ"]);
+                                p.DescProjeto = dr["PRODESCPROJ"].ToString();
                             }
                         }
                     }

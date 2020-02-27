@@ -17,15 +17,15 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("INSERT INTO AvaliacaoCriterio ");
-                sql.AppendLine("(dsCriterioAv) ");
-                sql.AppendLine("VALUES (@dsCriterioAv) ");
+                sql.AppendLine("INSERT INTO TAVALIACAOCRITERIO ");
+                sql.AppendLine("(AVCRDESCAVCR) ");
+                sql.AppendLine("VALUES (@AVCRDESCAVCR) ");
                 sql.AppendLine("SELECT SCOPE_IDENTITY(); ");//Linha Responsável por retornar id que foi Inserido
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@dsCriterioAv", ac.CriterioAvaliacao);
+                    cmd.Parameters.AddWithValue("@AVCRDESCAVCR", ac.CriterioAvaliacao);
 
                     con.Open();
                     ac.IdCriterioAvaliacao = Convert.ToInt32(cmd.ExecuteScalar());
@@ -41,15 +41,15 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("UPDATE AvaliacaoCriterio SET ");
-                sql.AppendLine("dsCriterioAv = @dsCriterioAv, ");
-                sql.AppendLine("WHERE idCriterioAv = @idCriterioAv ");
+                sql.AppendLine("UPDATE TAVALIACAOCRITERIO SET ");
+                sql.AppendLine("AVCRDESCAVCR = @AVCRDESCAVCR, ");
+                sql.AppendLine("WHERE AVCRIDAVCR = @AVCRIDAVCR ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@dsCriterioAv", ac.CriterioAvaliacao);
-                    cmd.Parameters.AddWithValue("@idCriterioAv", ac.IdCriterioAvaliacao);
+                    cmd.Parameters.AddWithValue("@AVCRDESCAVCR", ac.CriterioAvaliacao);
+                    cmd.Parameters.AddWithValue("@AVCRIDAVCR", ac.IdCriterioAvaliacao);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -63,11 +63,11 @@ namespace Library.DAL
             int linhasAfetadas = 0;
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
-                string sql = "DELETE FROM Projeto WHERE idCriterioAv = @idCriterioAv";
+                string sql = "DELETE FROM TAVALIACAOCRITERIO WHERE AVCRIDAVCR = @AVCRIDAVCR";
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@idCriterioAv", idAvaliacaoCriterio);
+                    cmd.Parameters.AddWithValue("@AVCRIDAVCR", idAvaliacaoCriterio);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -85,10 +85,10 @@ namespace Library.DAL
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idCriterioAv, a.dsCriterioAv");
-                sql.AppendLine("FROM AvaliacaoCriterio a ");
+                sql.AppendLine("SELECT a.AVCRIDAVCR, a.AVCRIDAVCR");
+                sql.AppendLine("FROM TAVALIACAOCRITERIO a ");
                 /*sql.AppendLine("WHERE a.FL_ATIVO = 1 ");*/
-                sql.AppendLine("ORDER BY a.dsCriterioAv ");
+                sql.AppendLine("ORDER BY a.AVCRDESCAVCR ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
@@ -100,8 +100,8 @@ namespace Library.DAL
                             {
                                 AvaliacaoCriterio ac = new AvaliacaoCriterio();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                ac.IdCriterioAvaliacao = Convert.ToInt32(dr["idCriterioAv"]);
-                                ac.CriterioAvaliacao = dr["dsCriterioAv"].ToString();
+                                ac.IdCriterioAvaliacao = Convert.ToInt32(dr["AVCRIDAVCR"]);
+                                ac.CriterioAvaliacao = dr["AVCRDESCAVCR"].ToString();
 
                                 listaAvCriterios.Add(ac);//Adicionando o objeto para a lista
                             }
@@ -121,15 +121,15 @@ namespace Library.DAL
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idCriterioAv, a.dsCriterioAv");
-                sql.AppendLine("FROM AvaliacaoCriterio a ");
-                sql.AppendLine("WHERE a.idCriterioAv = @idCriterioAv ");
-                sql.AppendLine("ORDER BY a.dsCriterioAv ");
+                sql.AppendLine("SELECT a.AVCRIDAVCR, a.AVCRIDAVCR");
+                sql.AppendLine("FROM TAVALIACAOCRITERIO a ");
+                sql.AppendLine("WHERE a.AVCRIDAVCR = @AVCRIDAVCR ");
+                sql.AppendLine("ORDER BY a.AVCRDESCAVCR ");
 
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
-                    cmd.Parameters.AddWithValue("@idCriterioAv", idCriterioAvaliacao); //Passagem de parametro
+                    cmd.Parameters.AddWithValue("@AVCRIDAVCR", idCriterioAvaliacao); //Passagem de parametro
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -139,8 +139,8 @@ namespace Library.DAL
                             {
                                 ac = new AvaliacaoCriterio();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                ac.IdCriterioAvaliacao = Convert.ToInt32(dr["idCriterioAv"]);
-                                ac.CriterioAvaliacao = dr["dsCriterioAv"].ToString();
+                                ac.IdCriterioAvaliacao = Convert.ToInt32(dr["AVCRIDAVCR"]);
+                                ac.CriterioAvaliacao = dr["AVCRDESCAVCR"].ToString();
 
                             }
                         }

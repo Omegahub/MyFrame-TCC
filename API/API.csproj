@@ -157,7 +157,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\AvaliacaoCriterioController.cs" />
-    <Compile Include="Controllers\ConsumidorController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\GestorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -165,18 +164,19 @@
     <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Controllers\TurmaItensController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VisitanteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AvaliacaoCriterioRepositorio.cs" />
     <Compile Include="Models\AvaliacaoRepositorio.cs" />
-    <Compile Include="Models\ConsumidorRepositorio.cs" />
     <Compile Include="Models\EventoRepositorio.cs" />
     <Compile Include="Models\GestorRepositorio.cs" />
     <Compile Include="Models\IRepositorio.cs" />
     <Compile Include="Models\ProjetoRepositorio.cs" />
     <Compile Include="Models\TurmaItensRepositorio.cs" />
     <Compile Include="Models\TurmaRepositorio.cs" />
+    <Compile Include="Models\VisitanteRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

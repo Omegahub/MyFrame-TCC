@@ -17,19 +17,19 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("INSERT INTO Evento ");
-                sql.AppendLine("(idEvento, nomeEvento, endEvento, dtEvento, descEvento, capaciMaxEvento) ");
-                sql.AppendLine("VALUES (@idEvento, @nomeEvento, @endEvento, @dtEvento, @descEvento, @capaciMaxEvento) ");
+                sql.AppendLine("INSERT INTO TEVENTO ");
+                sql.AppendLine("(EVIDEVENTO, EVNMEVENTO, EVENDEVENTO, EVDTEVENTO, EVDESCEVENTO, EVCAPAMAXEVENTO) ");
+                sql.AppendLine("VALUES (@EVIDEVENTO, @EVNMEVENTO, @EVENDEVENTO, @EVDTEVENTO, @EVDESCEVENTO, @EVCAPAMAXEVENTO) ");
                 sql.AppendLine("SELECT SCOPE_IDENTITY(); ");//Linha Responsável por retornar id que foi Inserido
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@nomeEvento", e.NomeEvento);
-                    cmd.Parameters.AddWithValue("@endEvento", e.EnderecoEvento);
-                    cmd.Parameters.AddWithValue("@dtEvento", e.DtEvento);
-                    cmd.Parameters.AddWithValue("@descEvento", e.DescEvento);
-                    cmd.Parameters.AddWithValue("@capaciMaxEvento", e.CapaciMaxEvento);
+                    cmd.Parameters.AddWithValue("@EVNMEVENTO", e.NomeEvento);
+                    cmd.Parameters.AddWithValue("@EVENDEVENTO", e.EnderecoEvento);
+                    cmd.Parameters.AddWithValue("@EVDTEVENTO", e.DtEvento);
+                    cmd.Parameters.AddWithValue("@EVDESCEVENTO", e.DescEvento);
+                    cmd.Parameters.AddWithValue("@EVCAPAMAXEVENTO", e.CapaciMaxEvento);
 
                     con.Open();
                     e.IdEvento = Convert.ToInt32(cmd.ExecuteScalar());
@@ -45,23 +45,23 @@ namespace Library.DAL
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("UPDATE Evento SET ");
-                sql.AppendLine("nomeEvento = @nomeEvento, ");
-                sql.AppendLine("endEvento = @endEvento, ");
-                sql.AppendLine("dtEvento = @dtEvento, ");
-                sql.AppendLine("descEvento = @descEvento, ");
-                sql.AppendLine("capaciMaxEvento = @capaciMaxEvento ");
-                sql.AppendLine("WHERE idEvento = @idEvento ");
+                sql.AppendLine("UPDATE TEVENTO SET ");
+                sql.AppendLine("EVNMEVENTO = @EVNMEVENTO, ");
+                sql.AppendLine("EVENDEVENTO = @EVENDEVENTO, ");
+                sql.AppendLine("EVDTEVENTO = @EVDTEVENTO, ");
+                sql.AppendLine("EVDESCEVENTO = @EVDESCEVENTO, ");
+                sql.AppendLine("EVCAPAMAXEVENTO = @EVCAPAMAXEVENTO ");
+                sql.AppendLine("WHERE EVIDEVENTO = @EVIDEVENTO ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@nomeEvento", e.NomeEvento);
-                    cmd.Parameters.AddWithValue("@endEvento", e.EnderecoEvento);
-                    cmd.Parameters.AddWithValue("@dtEvento", e.DtEvento);
-                    cmd.Parameters.AddWithValue("@descEvento", e.DescEvento);
-                    cmd.Parameters.AddWithValue("@capaciMaxEvento", e.CapaciMaxEvento);
-                    cmd.Parameters.AddWithValue("@idEvento", e.IdEvento);
+                    cmd.Parameters.AddWithValue("@EVNMEVENTO", e.NomeEvento);
+                    cmd.Parameters.AddWithValue("@EVENDEVENTO", e.EnderecoEvento);
+                    cmd.Parameters.AddWithValue("@EVDTEVENTO", e.DtEvento);
+                    cmd.Parameters.AddWithValue("@EVDESCEVENTO", e.DescEvento);
+                    cmd.Parameters.AddWithValue("@EVCAPAMAXEVENTO", e.CapaciMaxEvento);
+                    cmd.Parameters.AddWithValue("@EVIDEVENTO", e.IdEvento);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -76,11 +76,11 @@ namespace Library.DAL
             int linhasAfetadas = 0;
             using (SqlConnection con = new SqlConnection(ConnectionFactory.GetStringConexao()))
             {
-                string sql = "DELETE FROM Evento WHERE idEvento = @idEvento";
+                string sql = "DELETE FROM TEVENTO WHERE EVIDEVENTO = @EVIDEVENTO";
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@idEvento", idEvento);
+                    cmd.Parameters.AddWithValue("@EVIDEVENTO", idEvento);
 
                     con.Open();
                     linhasAfetadas = cmd.ExecuteNonQuery();
@@ -98,10 +98,10 @@ namespace Library.DAL
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idEvento, a.nomeEvento, a.endEvento, a.dtEvento, a.descEvento, a.capaciMaxEvento");
-                sql.AppendLine("FROM Evento a ");
+                sql.AppendLine("SELECT a.EVIDEVENTO, a.EVNMEVENTO, a.EVENDEVENTO, a.EVDTEVENTO, a.EVDESCEVENTO, a.EVCAPAMAXEVENTO");
+                sql.AppendLine("FROM TEVENTO a ");
                 /*sql.AppendLine("WHERE a.FL_ATIVO = 1 ");*/
-                sql.AppendLine("ORDER BY a.nomeEvento ");
+                sql.AppendLine("ORDER BY a.EVNMEVENTO ");
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
@@ -113,12 +113,12 @@ namespace Library.DAL
                             {
                                 Evento e = new Evento();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                e.IdEvento = Convert.ToInt32(dr["idEvento"]);
-                                e.NomeEvento = dr["nomeEvento"].ToString();
-                                e.EnderecoEvento = dr["endEvento"].ToString();
-                                e.DtEvento = Convert.ToDateTime(dr["dtEvento"]);
-                                e.DescEvento = dr["descEvento"].ToString();
-                                e.CapaciMaxEvento = Convert.ToInt32(dr["capaciMaxEvento"]);
+                                e.IdEvento = Convert.ToInt32(dr["EVIDEVENTO"]);
+                                e.NomeEvento = dr["EVNMEVENTO"].ToString();
+                                e.EnderecoEvento = dr["EVENDEVENTO"].ToString();
+                                e.DtEvento = Convert.ToDateTime(dr["EVDTEVENTO"]);
+                                e.DescEvento = dr["EVDESCEVENTO"].ToString();
+                                e.CapaciMaxEvento = Convert.ToInt32(dr["EVCAPAMAXEVENTO"]);
 
                                 listaEventos.Add(e);//Adicionando o objeto para a lista
                             }
@@ -138,15 +138,15 @@ namespace Library.DAL
                 con.Open();
 
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT a.idEvento, a.nomeEvento, a.endEvento, a.dtEvento, a.descEvento, a.capaciMaxEvento");
-                sql.AppendLine("FROM Evento a ");
-                sql.AppendLine("WHERE a.idEvento = @idEvento ");
-                sql.AppendLine("ORDER BY a.nomeEvento ");
+                sql.AppendLine("SELECT a.EVIDEVENTO, a.EVNMEVENTO, a.EVENDEVENTO, a.EVDTEVENTO, a.EVDESCEVENTO, a.EVCAPAMAXEVENTO");
+                sql.AppendLine("FROM TEVENTO a ");
+                sql.AppendLine("WHERE a.EVIDEVENTO = @EVIDEVENTO ");
+                sql.AppendLine("ORDER BY a.EVNMEVENTO ");
 
 
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), con))
                 {
-                    cmd.Parameters.AddWithValue("@idEvento", idEvento); //Passagem de parametro
+                    cmd.Parameters.AddWithValue("@EVIDEVENTO", idEvento); //Passagem de parametro
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -156,12 +156,12 @@ namespace Library.DAL
                             {
                                 e = new Evento();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
-                                e.IdEvento = Convert.ToInt32(dr["idEvento"]);
-                                e.NomeEvento = dr["nomeEvento"].ToString();
-                                e.EnderecoEvento = dr["endEvento"].ToString();
-                                e.DtEvento = Convert.ToDateTime(dr["dtEvento"]);
-                                e.DescEvento = dr["descEvento"].ToString();
-                                e.CapaciMaxEvento = Convert.ToInt32(dr["capaciMaxEvento"]);
+                                e.IdEvento = Convert.ToInt32(dr["EVIDEVENTO"]);
+                                e.NomeEvento = dr["EVNMEVENTO"].ToString();
+                                e.EnderecoEvento = dr["EVENDEVENTO"].ToString();
+                                e.DtEvento = Convert.ToDateTime(dr["EVDTEVENTO"]);
+                                e.DescEvento = dr["EVDESCEVENTO"].ToString();
+                                e.CapaciMaxEvento = Convert.ToInt32(dr["EVCAPAMAXEVENTO"]);
 
                             }
                         }
