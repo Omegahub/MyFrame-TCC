@@ -21,7 +21,7 @@ namespace Library.Business
         }
         public static int Delete(int idCriterioAvaliacao)
         {
-            return ConsumidorDAL.Delete(idCriterioAvaliacao);
+            return AvaliacaoCriterioDAL.Delete(idCriterioAvaliacao);
         }
 
         public static List<AvaliacaoCriterio> GetAll()

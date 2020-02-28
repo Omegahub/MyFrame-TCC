@@ -107,7 +107,7 @@ namespace Library.DAL
                                 Avaliacao a = new Avaliacao();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
                                 a.IdAvaliacao = Convert.ToInt32(dr["AVIDVISI"]);
-                                a.NotaAvaliacao = Convert.ToDouble(dr["AVNOTAAVA"].ToString());
+                                a.NotaAvaliacao = Convert.ToInt32(dr["AVNOTAAVA"]);
                                 a.DtAvaliacao = Convert.ToDateTime(dr["AVDATAAVA"]);
                                 a.Feedback = dr["AVFEEDBACKAVA"].ToString();
 
@@ -148,7 +148,7 @@ namespace Library.DAL
                                 a = new Avaliacao();//Instanciando o objeto da iteração
                                 //Preenchimento das propriedades a partir do que retornou no banco.
                                 a.IdAvaliacao = Convert.ToInt32(dr["AVIDVISI"]);
-                                a.NotaAvaliacao = Convert.ToDouble(dr["AVNOTAAVA"]);
+                                a.NotaAvaliacao = Convert.ToInt32(dr["AVNOTAAVA"]);
                                 a.DtAvaliacao = Convert.ToDateTime(dr["AVDATAAVA"]);
                                 a.Feedback = dr["AVFEEDBACKAVA"].ToString();
 

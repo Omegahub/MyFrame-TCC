@@ -70,11 +70,11 @@ CREATE TABLE TAVALIACAO
 	AVIDVISI	  int,
 	AVIDCRITAVA	  int,
 	AVIDPROJ	  int,
-	AVNOTAAVA	  varchar(20),
+	AVNOTAAVA	  int,
 	AVDATAAVA	  date,
 	AVFEEDBACKAVA varchar(500)
 
-	 constraint AV_PROJ_FK primary key (AVIDCRITAVA, AVIDPROJ, AVIDVISI) 
+	 constraint AV_PROJ_FK primary key (AVIDCRITAVA, AVIDPROJ, AVIDVISI)
 );
 GO
 
@@ -142,7 +142,9 @@ select * from TVISITANTE
 
 /*AVALIACAO*/
 insert into TAVALIACAO (AVIDVISI, AVIDCRITAVA, AVIDPROJ, AVNOTAAVA, AVDATAAVA, AVFEEDBACKAVA)
-	values(1,1,1,'avaliacao','2020-01-01','2 avaliacao'),
-		  (2,2,2,'valiacao2','2020-01-02', '3 avaliacao')
+	values(1,1,1,2,'2020-01-01','2 avaliacao'),
+		  (2,2,2,2,'2020-01-02', '3 avaliacao')
+
+delete from TAVALIACAO
 
 select * from TAVALIACAO

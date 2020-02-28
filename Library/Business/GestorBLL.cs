@@ -21,7 +21,7 @@ namespace Library.Business
         }
         public static int Delete(int idGestor)
         {
-            return ConsumidorDAL.Delete(idGestor);
+            return GestorDAL.Delete(idGestor);
         }
 
         public static List<Gestor> GetAll()

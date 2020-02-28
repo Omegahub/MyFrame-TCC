@@ -34,6 +34,4 @@ namespace API.Models
             return VisitanteBLL.Update(item);
         }
     }
-    {
-    }
 }
